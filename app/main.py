@@ -7,10 +7,10 @@ def main():
         sys.stdout.write("$ ")
         sys.stdout.flush()
         command = input()
-        if command == "exit 0":
-            break
-        print(f"{command}: command not found")
-
+        first_part, rest = command.split(None, 1)
+        if first_part == "echo":
+            print(rest)
+            
 
 
 if __name__ == "__main__":
