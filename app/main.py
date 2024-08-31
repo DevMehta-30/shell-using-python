@@ -11,7 +11,7 @@ def find_in_path(param):
                 return f"{dirpath}/{param}"
     return None
 
-def main():
+# def main():
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
@@ -35,7 +35,32 @@ def main():
                 else:
                     print(f"{command}: command not found")
 
-
+def main():
+    while True:
+        sys.stdout.write("$ ")
+        sys.stdout.flush()
+        # Wait for user input
+        command = input()
+        match command.split(" "):
+            case ["exit", "0"]:
+                exit(0)
+            case ["echo", *cmd]:
+                print(" ".join(cmd))
+            case ["type", *cmd]:
+                match cmd:
+                    case ["echo" | "exit" | "type"]:
+                        print(f"${cmd[0]} is a shell builtin")
+                    case _:
+                        location = find_in_path(cmd[0])
+                        if location:
+                            print(f"${cmd[0]} is {location}")
+                        else:
+                            print(f"${" ".join(cmd)} not found")
+            case _:
+                if os.path.isfile(command.split(" ")[0]):
+                    os.system(command)
+                else:
+                    print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()
