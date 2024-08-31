@@ -26,7 +26,7 @@ def main():
                 else:
                     print(f"{s}: not found")
             else:
-                if os.path.isfile(command.split(" ")[0]):
+                if os.PATH.isfile(command.split(" ")[0]):
                     os.system(command)
                 else:
                     print(f"{command}: command not found")
