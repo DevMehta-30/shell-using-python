@@ -96,7 +96,7 @@ def main() -> None:
                         if directory:
                             print(f'{target} is {directory}/{target}')
                         else:
-                            print(f'{target} not found')
+                            print(f'{target}: not found')
                 elif command == 'pwd':
                     print(getcwd())
                 elif command == 'cd':
