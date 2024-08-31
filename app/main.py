@@ -25,6 +25,8 @@ def main():
                     print(f"{s} is {cmd_path}")
                 else:
                     print(f"{s}: not found")
+            elif command=="pwd":
+                print(os.getcwd())
             else:
                 if command.startswith('my_exe'):
                     os.system(command)
