@@ -22,7 +22,7 @@ def main():
                 if s in ["echo","exit","type"]:
                     print(f"{s} is a shell builtin")
                 elif cmd_path:
-                    print(f"{s} is {cmd_path}\n")
+                    print(f"{s} is {cmd_path}")
                 else:
                     print(f"{s} not found")
             else:
