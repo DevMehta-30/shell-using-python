@@ -6,13 +6,13 @@ def main():
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
-        command = input()
-        if command == "exit 0":
-            sys.exit(0)
-        first_part, rest = command.split(None, 1)
-        if first_part == "echo":
-            print(rest)
-        print(f"{command}: command not found")
+        if command := input().strip():
+            if command == "exit 0":
+                sys.exit(0)
+            elif command.startswith("echo "):
+                print(command[len("echo ") :])
+            else:
+                print(f"{command}: command not found")
 
 
 
