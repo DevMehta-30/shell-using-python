@@ -1,17 +1,10 @@
 import sys
 import os
+import subprocess
 
-def find_in_path(param):
-    path = os.environ['PATH']
-    print("Path: " + path)
-    print(f"Param: {param}")
-    for directory in path.split(":"):
-        for (dirpath, dirnames, filenames) in os.walk(directory):
-            if param in filenames:
-                return f"{dirpath}/{param}"
-    return None
-
-# def main():
+def main():
+    # Uncomment this block to pass the first stage
+    path=os.environ["PATH"]
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
@@ -22,45 +15,24 @@ def find_in_path(param):
                 print(command[len("echo ") :])
             elif command.startswith("type "):
                 s=command[len("type "):]
-                location=find_in_path(s)
+                cmd_path=None
+                paths=path.split(":")
+                for p in paths:
+                    if os.path.isfile(f"{p}/{s}"):
+                        cmd_path = f"{p}/{s}"
                 if s in ["echo","exit","type"]:
                     print(f"{s} is a shell builtin")
-                elif location:
-                    print(f"{s} is {location}")
+                elif cmd_path:
+                    print(f"{s} is {cmd_path}")
                 else:
                     print(f"{s}: not found")
             else:
                 if os.path.isfile(command.split(" ")[0]):
-                    os.system(command)
+                    subprocess.run(command)
                 else:
                     print(f"{command}: command not found")
 
-def main():
-    while True:
-        sys.stdout.write("$ ")
-        sys.stdout.flush()
-        # Wait for user input
-        command = input()
-        match command.split(" "):
-            case ["exit", "0"]:
-                exit(0)
-            case ["echo", *cmd]:
-                print(" ".join(cmd))
-            case ["type", *cmd]:
-                match cmd:
-                    case ["echo" | "exit" | "type"]:
-                        print(f"${cmd[0]} is a shell builtin")
-                    case _:
-                        location = find_in_path(cmd[0])
-                        if location:
-                            print(f"${cmd[0]} is {location}")
-                        else:
-                            print(f"${" ".join(cmd)} not found")
-            case _:
-                if os.path.isfile(command.split(" ")[0]):
-                    os.system(command)
-                else:
-                    print(f"{command}: command not found")
+
 
 if __name__ == "__main__":
     main()
