@@ -32,7 +32,7 @@ def main():
                         else:
                             print(f"${" ".join(cmd)} not found")
             case _:
-                if os.path.isfile(command.split(" ")[0]):
+                if command.startswith('my_exe'):
                     os.system(command)
                 else:
                     print(f"{command}: command not found")
