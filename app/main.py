@@ -2,6 +2,7 @@ import sys
 import os
 from os import chdir
 from os.path import expanduser
+from subprocess import call
 
 def main():
     # Uncomment this block to pass the first stage
@@ -35,6 +36,8 @@ def main():
                     chdir(expanduser(d))
                 except OSError:
                     print(f"cd: {d}: No such file or directory")
+            elif command.startswith("/"):
+                    call("{}".format(command), shell=True)
             else:
                 if command.startswith('my_exe'):
                     os.system(command)
