@@ -11,7 +11,7 @@ def main():
         if user_command not in valid_commands:
             print(f"{user_command}: command not found")
             continue
-        elif user_command == "exit 0":
+        if user_command == "exit 0":
             break
 
 
