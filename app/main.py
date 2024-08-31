@@ -6,9 +6,10 @@ def main():
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
-        user_command = input()
-        if user_command == "exit 0":
+        command = input()
+        if command == "exit 0":
             break
+        print(f"{command}: command not found")
 
 
 
