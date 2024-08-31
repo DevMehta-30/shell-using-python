@@ -3,11 +3,11 @@ import os
 
 def main():
     # Uncomment this block to pass the first stage
-    PATH=os.environ["PATH"]
+    path=os.environ["PATH"]
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
-        if command := input().strip():
+        if command := input():
             if command == "exit 0":
                 sys.exit(0)
             elif command.startswith("echo "):
@@ -15,10 +15,10 @@ def main():
             elif command.startswith("type "):
                 s=command[len("type "):]
                 cmd_path=None
-                paths=PATH.split(":")
-                for path in paths:
-                    if os.path.isfile(f"{path}/{s}"):
-                        cmd_path = f"{path}/{s}"
+                paths=path.split(":")
+                for p in paths:
+                    if os.path.isfile(f"{p}/{s}"):
+                        cmd_path = f"{p}/{s}"
                 if s in ["echo","exit","type"]:
                     print(f"{s} is a shell builtin")
                 elif cmd_path:
