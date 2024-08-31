@@ -1,9 +1,17 @@
 import sys
 import os
 
+def find_in_path(param):
+    path = os.environ['PATH']
+    print("Path: " + path)
+    print(f"Param: {param}")
+    for directory in path.split(":"):
+        for (dirpath, dirnames, filenames) in os.walk(directory):
+            if param in filenames:
+                return f"{dirpath}/{param}"
+    return None
+
 def main():
-    # Uncomment this block to pass the first stage
-    path=os.environ["PATH"]
     while True:
         sys.stdout.write("$ ")
         sys.stdout.flush()
@@ -14,15 +22,11 @@ def main():
                 print(command[len("echo ") :])
             elif command.startswith("type "):
                 s=command[len("type "):]
-                cmd_path=None
-                paths=path.split(":")
-                for p in paths:
-                    if os.path.isfile(f"{p}/{s}"):
-                        cmd_path = f"{p}/{s}"
+                location=find_in_path(s)
                 if s in ["echo","exit","type"]:
                     print(f"{s} is a shell builtin")
-                elif cmd_path:
-                    print(f"{s} is {cmd_path}")
+                elif location:
+                    print(f"{s} is {location}")
                 else:
                     print(f"{s}: not found")
             else:
