@@ -24,7 +24,7 @@ def main():
                 elif cmd_path:
                     print(f"{s} is {cmd_path}")
                 else:
-                    print(f"{s} not found")
+                    print(f"{s}: not found")
             else:
                 print(f"{command}: command not found")
 
