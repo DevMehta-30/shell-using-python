@@ -1,6 +1,5 @@
 import sys
 import os
-import subprocess
 
 def main():
     # Uncomment this block to pass the first stage
@@ -27,8 +26,9 @@ def main():
                 else:
                     print(f"{s}: not found")
             else:
+                print(command.split(" ")[0])
                 if os.path.isfile(command.split(" ")[0]):
-                    subprocess.run(command)
+                    os.system(command)
                 else:
                     print(f"{command}: command not found")
 
